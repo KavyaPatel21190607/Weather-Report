@@ -1,0 +1,706 @@
+/* Smart Farming Chatbot - Main Stylesheet */
+
+/* ======= ROOT VARIABLES ======= */
+:root {
+    /* Color Palette - Farming Theme - Light Mode (Default) */
+    --primary-green: #4caf50;
+    --light-green: #8bc34a;
+    --dark-green: #2e7d32;
+    --earth-brown: #795548;
+    --light-brown: #a1887f;
+    --sky-blue: #03a9f4;
+    --sunlight-yellow: #ffd54f;
+    --white: #ffffff;
+    --light-gray: #f5f5f5;
+    --medium-gray: #e0e0e0;
+    --dark-gray: #757575;
+    --black: #212121;
+    
+    /* Theme Colors - Light Mode (Default) */
+    --background-color: var(--light-gray);
+    --foreground-color: var(--black);
+    --primary-color: var(--primary-green);
+    --secondary-color: var(--dark-green);
+    --card-background: var(--white);
+    --header-background: var(--primary-green);
+    --header-text: var(--white);
+    --footer-background: var(--dark-green);
+    --footer-text: var(--white);
+    --border-color: var(--medium-gray);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Font Sizes */
+    --font-xs: 0.75rem;
+    --font-sm: 0.875rem;
+    --font-md: 1rem;
+    --font-lg: 1.25rem;
+    --font-xl: 1.5rem;
+    --font-xxl: 2rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-rounded: 50%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ======= DARK MODE ======= */
+[data-theme="dark"] {
+    --background-color: #1e1e1e;
+    --foreground-color: var(--white);
+    --primary-color: #5cbc60;
+    --secondary-color: #3e9142;
+    --card-background: #2d2d2d;
+    --header-background: #3e9142;
+    --header-text: var(--white);
+    --footer-background: #2a6a2e;
+    --footer-text: var(--white);
+    --border-color: #444444;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ======= GLOBAL STYLES ======= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--foreground-color);
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ======= HEADER ======= */
+.header {
+    background-color: var(--header-background);
+    color: var(--header-text);
+    padding: var(--spacing-md) var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+/* Theme Toggle Switch */
+.theme-toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 28px;
+    margin-right: var(--spacing-md);
+}
+
+.theme-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--medium-gray);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.theme-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--white);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .theme-slider {
+    background-color: var(--dark-gray);
+}
+
+input:checked + .theme-slider:before {
+    transform: translateX(32px);
+}
+
+.theme-toggle .sun-icon,
+.theme-toggle .moon-icon {
+    position: absolute;
+    top: 6px;
+    font-size: 16px;
+    color: var(--white);
+    z-index: 1;
+}
+
+.theme-toggle .sun-icon {
+    left: 8px;
+}
+
+.theme-toggle .moon-icon {
+    right: 8px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.logo i {
+    font-size: var(--font-xl);
+}
+
+.logo h1 {
+    font-size: var(--font-lg);
+    font-weight: 600;
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+/* ======= MAIN LAYOUT ======= */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .main-container {
+        flex-direction: row;
+    }
+}
+
+/* ======= CHAT CONTAINER ======= */
+.chat-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.chat-header {
+    padding: var(--spacing-md);
+    background-color: var(--dark-green);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-title {
+    font-size: var(--font-lg);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.chat-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    background-color: var(--background-color);
+}
+
+.message {
+    max-width: 80%;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: var(--radius-md) var(--radius-md) 0 var(--radius-md);
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: var(--card-background);
+    color: var(--foreground-color);
+    border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.bot-avatar {
+    min-width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: var(--radius-rounded);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-lg);
+}
+
+.message-content {
+    flex: 1;
+}
+
+.message p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.message p:last-child {
+    margin-bottom: 0;
+}
+
+.message ul, .message ol {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+.message li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.typing-indicator {
+    align-self: flex-start;
+}
+
+.typing-animation {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: var(--spacing-sm);
+}
+
+.typing-animation span {
+    width: 8px;
+    height: 8px;
+    background-color: var(--dark-gray);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typing 1.4s infinite both;
+}
+
+.typing-animation span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-animation span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+.chat-input-container {
+    padding: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-sm);
+    background-color: var(--white);
+    border-top: 1px solid var(--medium-gray);
+}
+
+.chat-input {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.chat-input:focus {
+    border-color: var(--primary-green);
+}
+
+.button {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-md);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.button:hover {
+    background-color: var(--dark-green);
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+.small-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-sm);
+    background-color: var(--primary-green);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.small-button:hover {
+    background-color: var(--dark-green);
+}
+
+/* ======= SIDEBAR ======= */
+.sidebar {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 300px;
+    }
+}
+
+.sidebar-widget {
+    background-color: var(--card-background);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--spacing-lg);
+    overflow: hidden;
+}
+
+.widget-header {
+    padding: var(--spacing-md);
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+}
+
+.widget-content {
+    padding: var(--spacing-md);
+    color: var(--foreground-color);
+}
+
+/* ======= WEATHER WIDGET ======= */
+.weather-header {
+    padding: var(--spacing-md);
+    background-color: var(--sky-blue);
+    color: var(--white);
+    font-weight: 600;
+}
+
+.weather-header h3 {
+    margin: 0;
+    font-size: var(--font-md);
+}
+
+.weather-current {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--card-background);
+    color: var(--foreground-color);
+}
+
+.weather-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.weather-icon i {
+    font-size: var(--font-xxl);
+    color: var(--sky-blue);
+}
+
+.weather-details {
+    flex: 1;
+    padding-left: var(--spacing-md);
+}
+
+.weather-details .temp {
+    font-size: var(--font-xl);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.weather-info {
+    padding: var(--spacing-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--foreground-color);
+    background-color: var(--card-background);
+}
+
+.weather-info p {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: 0;
+    color: var(--foreground-color);
+}
+
+.weather-farming-tips {
+    padding: var(--spacing-md);
+    background-color: var(--card-background);
+    color: var(--foreground-color);
+}
+
+.weather-farming-tips h4 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color);
+}
+
+.weather-farming-tips ul {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--foreground-color);
+}
+
+.weather-farming-tips li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.weather-error {
+    padding: var(--spacing-lg);
+    text-align: center;
+    color: var(--dark-gray);
+}
+
+/* ======= QUICK LINKS WIDGET ======= */
+.quick-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.3s ease;
+    color: var(--foreground-color);
+}
+
+.quick-link:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.quick-link i {
+    color: var(--primary-color);
+    font-size: var(--font-lg);
+    width: 24px;
+    text-align: center;
+}
+
+.quick-link:hover i {
+    color: var(--white);
+}
+
+/* ======= FARMING IMAGES WIDGET ======= */
+.farming-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.farming-image {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.farming-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.farming-image:hover img {
+    transform: scale(1.05);
+}
+
+/* ======= FOOTER ======= */
+.footer {
+    background-color: var(--footer-background);
+    color: var(--footer-text);
+    padding: var(--spacing-lg);
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* ======= RESPONSIVE ADJUSTMENTS ======= */
+@media (max-width: 768px) {
+    .main-container {
+        padding: var(--spacing-md);
+    }
+    
+    .chat-container {
+        height: 50vh;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+    
+    .button {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .logo h1 {
+        font-size: var(--font-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .chat-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .chat-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .weather-current {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .weather-details {
+        padding-left: 0;
+        padding-top: var(--spacing-sm);
+    }
+    
+    .farming-images {
+        grid-template-columns: 1fr;
+    }
+}
